@@ -31,7 +31,7 @@ function Navbar() {
     timer = (setTimeout(() => fun(), delay));
   }
 
-  // console.log("name in state", name);
+  console.log("name in state", name);
   // console.log(query, "query");
 
   async function mymovie() {

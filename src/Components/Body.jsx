@@ -19,9 +19,9 @@ const Body = (props) => {
             // }}
           >
             <Link to={`/details/${element.title}`}>
-              <span style={{ color: "green" }}>
+              {/* <span style={{ color: "green" }}>
                 {element.vote_average > 8.5 ? "Recommended" : ""}
-              </span>
+              </span> */}
               <div className="img_box">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
@@ -29,12 +29,9 @@ const Body = (props) => {
                 />
               </div>
               <p>{element.title}</p>
-              <div className="rate">
                 <p>{`Realese Date: ${element.release_date}`}</p>
                 <p>{`Rating : ${element.vote_average}`}</p>
-              </div>
             </Link>
-            {/* document.getElementById("movie").append(box) */}
           </div>
         ))
       ) : (

@@ -24,31 +24,11 @@ function Navbar() {
     // mymovie();
     movie_data();
   }, []);
-  function debounce(fun, delay) {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    setTimer(setTimeout(() => fun(), delay));
-  }
+ 
   
   // console.log(query, "query");
   
-  console.log("name in state : ", name);
-  async function mymovie() {
-    try {
-      console.log("name in api function  : ", name);
-      let movie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}`
-        // `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=thor&page=1`
-      );
-      movie = await movie.json();
-      console.log(movie.results);
-      setData(movie.results);
-    } catch (er) {
-      console.log("error", er);
-    }
-  }
-
+  
   async function movie_data() {
     try {
       setLoading(true);
@@ -67,6 +47,26 @@ function Navbar() {
     }
   }
 
+   function debounce(fun, delay) {
+     if (timer) {
+       clearTimeout(timer);
+     }
+     setTimer(setTimeout(() => fun(), delay));
+   }
+  
+  console.log("name in state : ", name);
+
+  async function mymovie() {
+    try {
+      console.log("name in api function  : ", name);
+      let movie = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}`
+      );
+      movie = await movie.json();
+      console.log(movie.results);
+      setData(movie.results);
+    } catch (er) { console.log("error", er) }
+  }
   return (
     <div>
       <div className="nav">
@@ -80,18 +80,27 @@ function Navbar() {
           <input
             type="text"
             id="movie_name"
-            placeholder="Enter Your movie name"
-            // value=""
             onInput={(e) => {
               setName(e.target.value), debounce(mymovie, 1000);
             }}
+            placeholder="Enter Your movie name"
           />
-          {/* <a href="trending.html">Trending Movies</a> */}
         </div>
       </div>
       <div id="err"></div>
+        {loading && (
+          <div
+            style={{
+            textAlign: "center",
+              marginTop:"10%",
+              fontWeight: "bold",
+              fontSize: "2.4rem",
+            }}
+          >
+            Loading Please Wait .....
+          </div>
+        )}
       <div id="movie">
-        {loading && <div>...Loading</div>}
         {error && <div>Something went wrong!</div>}
         {data && data.length !== 0 && <Body data={data} />}
       </div>

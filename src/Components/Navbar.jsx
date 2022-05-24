@@ -70,14 +70,18 @@ function Navbar() {
   return (
     <div>
       <div className="nav">
-        <div id="logo">Movie World</div>
+        <a href="/">
+          <div id="logo">Get Moive Details</div>
+        </a>
         <div id="serch">
           <input
             type="text"
             id="movie_name"
             placeholder="Enter Your movie name"
             // value=""
-            onInput={(e)=>{ setName(e.target.value), debounce(mymovie, 1000);}}
+            onInput={(e) => {
+              setName(e.target.value), debounce(mymovie, 1000);
+            }}
           />
           {/* <a href="trending.html">Trending Movies</a> */}
         </div>

@@ -71,11 +71,11 @@ body{
     justify-content: space-around; */
     margin: 1px;
 }
-Link
+a
 {
     text-decoration: none;
     color: black;
-    font-size: 0.6em;
+    /* font-size: 0.6em; */
     margin-left: 20px;
 }
 @media screen and (min-width:0px) and (max-width:320px){

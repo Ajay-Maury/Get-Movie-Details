@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Body from "./Body";
 import "./Navbar.css";
 
@@ -36,7 +37,7 @@ function Navbar() {
   console.log("name in state : ", name);
   async function mymovie() {
     try {
-      console.log("name in api  : ", name);
+      console.log("name in api function  : ", name);
       let movie = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}`
         // `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=thor&page=1`
@@ -70,9 +71,12 @@ function Navbar() {
   return (
     <div>
       <div className="nav">
-        <a href="/">
+        <Link to="/">
           <div id="logo">Get Moive Details</div>
-        </a>
+        </Link>
+        {/* <a href="/">
+          <div id="logo">Get Moive Details</div>
+        </a> */}
         <div id="serch">
           <input
             type="text"

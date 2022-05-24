@@ -39,8 +39,7 @@ const Details = () => {
             }}
           >
             {loading ? "Loading Please Wait " : data.Title}
-          </div>
-          {/* {data.map((data, i) => ( */}
+          </div> 
           {data.Response === "True" ? (
             <div className="box1">
               <div className="poster_box">
@@ -93,7 +92,6 @@ const Details = () => {
               {data.Error}{" "}
             </div>
           )}
-          {/* ))} */}
         </div>
       </div>
     </>

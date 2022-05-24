@@ -30,7 +30,7 @@ const Body = (props) => {
               </div>
               <p>{element.title}</p>
                 <p>{`Realese Date: ${element.release_date}`}</p>
-                <p>{`Rating : ${element.vote_average}`}</p>
+                {/* <p>{`Rating : ${element.vote_average}`}</p> */}
             </Link>
           </div>
         ))

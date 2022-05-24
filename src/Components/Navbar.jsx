@@ -71,12 +71,12 @@ function Navbar() {
   return (
     <div>
       <div className="nav">
-        <Link to="/">
+        {/* <Link to="/">
           <div id="logo">Get Moive Details</div>
-        </Link>
-        {/* <a href="/">
+        </Link> */}
+        <a href="/">
           <div id="logo">Get Moive Details</div>
-        </a> */}
+        </a>
         <div id="serch">
           <input
             type="text"

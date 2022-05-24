@@ -1,0 +1,55 @@
+body{
+    background-color: rgb(245, 233, 233);
+}
+
+#container{
+    background-color: rgb(219, 236, 250);
+    width: 70%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 35px auto;
+    border-radius: 10px;
+    padding: 2px;
+}
+#btn{
+    font-size: 2.1em;
+    text-align: right;
+    padding: 2px 5px;
+}
+.box1{
+    display: flex;
+    padding: 0px 5px;
+    font-size: 1.2em;
+    justify-content: center;
+}
+.poster_box{
+    font-size: 1.25em;
+    text-align: center;    
+    font-weight: bolder;
+    margin: 5px;
+}
+.poster_box img{
+    border-radius: 5px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.detail_box{
+    padding: 20px;
+}
+
+@media screen and (min-width:720px) and (max-width:950px) {
+    #container{
+        width: 90%;
+        margin: 30px auto;
+    }
+}
+
+@media screen and (min-width:0px) and (max-width:720px) {
+    .box1{
+        display: block;
+    }
+}
+
+@media screen and (min-width:0px) and (max-width:500px) {
+    .poster_box img{
+        width: 90%;
+    }
+}

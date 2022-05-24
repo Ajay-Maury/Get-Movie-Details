@@ -24,12 +24,12 @@ function Navbar() {
     // mymovie();
     movie_data();
   }, []);
-  let timer=null;
+  let timer;
   function debounce(fun, delay) {
     if (timer) {
       clearTimeout(timer);
     }
-    timer = (setTimeout(() => fun(), delay));
+    timer = setTimeout(() => fun(), delay);
   }
   
   // console.log(query, "query");

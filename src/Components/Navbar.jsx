@@ -6,7 +6,7 @@ import "./Navbar.css";
 function Navbar() {
   const [name, setName] = useState("");
   const [data, setData] = useState([]);
-  // const [timer, setTimer] = useState("");
+  const [timer, setTimer] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -24,12 +24,11 @@ function Navbar() {
     // mymovie();
     movie_data();
   }, []);
-  let timer;
   function debounce(fun, delay) {
     if (timer) {
       clearTimeout(timer);
     }
-    timer = setTimeout(() => fun(), delay);
+    setTimer(setTimeout(() => fun(), delay));
   }
   
   // console.log(query, "query");

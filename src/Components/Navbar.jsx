@@ -24,8 +24,8 @@ function Navbar() {
     // mymovie();
     movie_data();
   }, []);
+  let timer=null;
   function debounce(fun, delay) {
-    let timer=null;
     if (timer) {
       clearTimeout(timer);
     }

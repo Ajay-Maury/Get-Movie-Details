@@ -10,14 +10,14 @@ function Navbar() {
   const [error, setError] = useState(false);
 
 
-  function handleInput(e) {
-    // let mname = e.target.value;
-    // console.log(mname);
-    // setName(mname);
-    if (name) {
-      debounce(mymovie, 1000);
-    }
-  }
+  // function handleInput(e) {
+  //   // let mname = e.target.value;
+  //   // console.log(mname);
+  //   // setName(mname);
+  //   if (name) {
+  //     debounce(mymovie, 1000);
+  //   }
+  // }
 
   useEffect(() => {
     // mymovie();
@@ -31,7 +31,7 @@ function Navbar() {
     timer = (setTimeout(() => fun(), delay));
   }
 
-  // console.log("name", name);
+  // console.log("name in state", name);
   // console.log(query, "query");
 
   async function mymovie() {

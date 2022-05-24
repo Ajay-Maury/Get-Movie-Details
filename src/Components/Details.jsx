@@ -18,7 +18,7 @@ const Details = () => {
     res = await res.json();
     console.log(res);
     setLoading(false);
-    setData([res]);
+    setData(res);
   }
   // const navigate = useN
   return (
@@ -35,13 +35,14 @@ const Details = () => {
               textAlign: "center",
               fontWeight: "bold",
               fontSize: "2rem",
-              marginBottom:"1%",
+              marginBottom: "1%",
             }}
           >
-            {loading ? "Loading Please Wait " : data[0].Title}
+            {loading ? "Loading Please Wait " : data.Title}
           </div>
-          {data.map((data, i) => (
-            <div className="box1" key={i}>
+          {/* {data.map((data, i) => ( */}
+          {data.Response === "True" ? (
+            <div className="box1">
               <div className="poster_box">
                 <img src={data.Poster} alt="" />
               </div>
@@ -80,7 +81,19 @@ const Details = () => {
                 </p>
               </div>
             </div>
-          ))}
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: "2rem",
+                marginBottom: "1%",
+              }}
+            >
+              {data.Error}{" "}
+            </div>
+          )}
+          {/* ))} */}
         </div>
       </div>
     </>

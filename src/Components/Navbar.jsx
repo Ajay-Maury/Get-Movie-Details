@@ -25,18 +25,18 @@ function Navbar() {
   }, []);
   function debounce(fun, delay) {
     let timer=null;
-    console.log("name in state : ", name);
     if (timer) {
       clearTimeout(timer);
     }
     timer = (setTimeout(() => fun(), delay));
   }
-
+  
   // console.log(query, "query");
-
+  
+  console.log("name in state : ", name);
   async function mymovie() {
     try {
-      console.log("name in api : ", name);
+      console.log("name in api  : ", name);
       let movie = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}`
         // `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=thor&page=1`

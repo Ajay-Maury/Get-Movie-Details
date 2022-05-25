@@ -6,7 +6,7 @@ const Body = (props) => {
     <>
       {props.data.length !== 0 ? (
         props.data.map((element, i) => (
-          // console.log(element
+          // console.log(element 
           <div
             key={i}
             className="box"

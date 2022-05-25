@@ -4,30 +4,16 @@ import Body from "./Body";
 import "./Navbar.css";
 
 function Navbar() {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
+  const nameRef = useRef(null)
   const [data, setData] = useState([]);
   const [timer, setTimer] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-
-  // function handleInput(e) {
-  //   // let mname = e.target.value;
-  //   // console.log(mname);
-  //   // setName(mname);
-  //   if (name) {
-  //     debounce(mymovie, 1000);
-  //   }
-  // }
-
-  useEffect(() => {
-    // mymovie();
-    movie_data();
-  }, []);
- 
-  
-  // console.log(query, "query");
-  
+  useEffect(() => { movie_data();
+}, []);
+   
   
   async function movie_data() {
     try {
@@ -36,7 +22,7 @@ function Navbar() {
         "https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35"
       );
       let data = await res.json();
-      console.log(data.results);
+      // console.log(data.results);
       setData(data.results);
       setLoading(false);
       setError(false);
@@ -48,22 +34,23 @@ function Navbar() {
   }
 
    function debounce(fun, delay) {
+    //  console.log("name in debounce : ", nameRef.current);
      if (timer) {
        clearTimeout(timer);
      }
      setTimer(setTimeout(() => fun(), delay));
    }
   
-  console.log("name in state : ", name);
+  // console.log("name in state : ", name);
 
   async function mymovie() {
     try {
-      console.log("name in api function  : ", name);
+      // console.log("name in api function  : ", nameRef.current);
       let movie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}`
+        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${nameRef.current}`
       );
       movie = await movie.json();
-      console.log(movie.results);
+      // console.log(movie.results);
       setData(movie.results);
     } catch (er) { console.log("error", er) }
   }
@@ -81,7 +68,8 @@ function Navbar() {
             type="text"
             id="movie_name"
             onInput={(e) => {
-              setName(e.target.value), debounce(mymovie, 1000);
+             nameRef.current =e.target.value
+              debounce(mymovie, 1000);
             }}
             placeholder="Enter Your movie name"
           />

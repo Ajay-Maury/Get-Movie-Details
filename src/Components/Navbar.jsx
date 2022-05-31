@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Body from "./Body";
 import "./Navbar.css";
 
 function Navbar() {
-  // const [name, setName] = useState("");
   const nameRef = useRef(null)
+  const timerRef = useRef(null)
+  const page = useRef(1);
+  const totalPage = useRef(null)
   const [data, setData] = useState([]);
-  const [timer, setTimer] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -22,7 +23,7 @@ function Navbar() {
         "https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35"
       );
       let data = await res.json();
-      // console.log(data.results);
+      console.log(data.results);
       setData(data.results);
       setLoading(false);
       setError(false);
@@ -35,10 +36,10 @@ function Navbar() {
 
    function debounce(fun, delay) {
     //  console.log("name in debounce : ", nameRef.current);
-     if (timer) {
-       clearTimeout(timer);
+     if (timerRef.current) {
+       clearTimeout(timerRef.current);
      }
-     setTimer(setTimeout(() => fun(), delay));
+     timerRef.current=(setTimeout(() => fun(), delay));
    }
   
   // console.log("name in state : ", name);
@@ -47,28 +48,37 @@ function Navbar() {
     try {
       // console.log("name in api function  : ", nameRef.current);
       let movie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${nameRef.current}`
+        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${nameRef.current}&page=${page.current}`
       );
       movie = await movie.json();
-      // console.log(movie.results);
-      setData(movie.results);
+      if (movie.results) {
+        totalPage.current = movie.total_pages;
+        console.log(movie, "pages", totalPage);
+        console.log("dta", movie.results);
+        setData(movie.results);
+      }
+      else {
+        totalPage.current = null;
+        page.current=1
+        movie_data();
+      }
     } catch (er) { console.log("error", er) }
   }
   return (
     <div>
       <div className="nav">
-        {/* <Link to="/">
+        <Link to="/">
           <div id="logo">Get Moive Details</div>
-        </Link> */}
-        <a href="/">
+        </Link>
+        {/* <a href="/">
           <div id="logo">Get Moive Details</div>
-        </a>
+        </a> */}
         <div id="serch">
           <input
             type="text"
             id="movie_name"
             onInput={(e) => {
-             nameRef.current =e.target.value
+              nameRef.current = e.target.value;
               debounce(mymovie, 1000);
             }}
             placeholder="Enter Your movie name"
@@ -76,22 +86,44 @@ function Navbar() {
         </div>
       </div>
       <div id="err"></div>
-        {loading && (
-          <div
-            style={{
+      {loading && (
+        <div
+          style={{
             textAlign: "center",
-              marginTop:"10%",
-              fontWeight: "bold",
-              fontSize: "2.4rem",
-            }}
-          >
-            Loading Please Wait .....
-          </div>
-        )}
+            marginTop: "10%",
+            fontWeight: "bold",
+            fontSize: "2.4rem",
+          }}
+        >
+          Loading Please Wait .....
+        </div>
+      )}
       <div id="movie">
         {error && <div>Something went wrong!</div>}
         {data && data.length !== 0 && <Body data={data} />}
       </div>
+      {data && data.length !== 0 && (
+        <footer className="pageBtn">
+          {page.current > 1 && (
+            <button
+              onClick={() => {
+                page.current = (page.current - 1), mymovie();
+              }}
+            >
+              Prev
+            </button>
+          )}
+          {totalPage.current > 1 && page.current < totalPage.current && (
+            <button
+              onClick={() => {
+                page.current = (page.current + 1), mymovie();
+              }}
+            >
+              Next
+            </button>
+          )}
+        </footer>
+      )}
     </div>
   );
 }

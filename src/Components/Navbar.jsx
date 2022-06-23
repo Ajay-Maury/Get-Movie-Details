@@ -1,41 +1,31 @@
 import React, {useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchTrendingData } from "../redux/trending/action";
 import Body from "./Body";
 import "./Navbar.css";
+import {useDispatch,useSelector} from "react-redux"
+  
 
 function Navbar() {
+  const dispatch = useDispatch()
   const nameRef = useRef(null)
   const timerRef = useRef(null)
   const page = useRef(1);
   const totalPage = useRef(null)
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const { loading, error, movieData } = useSelector((state) => state.trendingData);
+  const data = movieData.results;
+  console.log("moda", data);
 
-  useEffect(() => { movie_data();
+  useEffect(() => {
+    dispatch(fetchTrendingData())
+    // movie_data();
 }, []);
    
   
-  async function movie_data() {
-    try {
-      setLoading(true);
-      let res = await fetch(
-        "https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35"
-      );
-      let data = await res.json();
-      console.log(data.results);
-      setData(data.results);
-      setLoading(false);
-      setError(false);
-    } catch (err) {
-      setError(true);
-      setLoading(false);
-      console.log("error", err);
-    }
-  }
 
    function debounce(fun, delay) {
     //  console.log("name in debounce : ", nameRef.current);
+    
      if (timerRef.current) {
        clearTimeout(timerRef.current);
      }
@@ -44,26 +34,26 @@ function Navbar() {
   
   // console.log("name in state : ", name);
 
-  async function mymovie() {
-    try {
-      // console.log("name in api function  : ", nameRef.current);
-      let movie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${nameRef.current}&page=${page.current}`
-      );
-      movie = await movie.json();
-      if (movie.results) {
-        totalPage.current = movie.total_pages;
-        console.log(movie, "pages", totalPage);
-        console.log("dta", movie.results);
-        setData(movie.results);
-      }
-      else {
-        totalPage.current = null;
-        page.current=1
-        movie_data();
-      }
-    } catch (er) { console.log("error", er) }
-  }
+  // async function mymovie() {
+  //   try {      
+  //     // console.log("name in api function  : ", nameRef.current);
+  //     let movie = await fetch(
+  //       `https://api.themoviedb.org/3/search/movie?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${nameRef.current}&page=${page.current}`
+  //     );
+  //     movie = await movie.json();
+  //     if (movie.results) {
+  //       totalPage.current = movie.total_pages;
+  //       console.log(movie, "pages", totalPage);
+  //       console.log("dta", movie.results);
+  //       setData(movie.results);
+  //     }
+  //     else {
+  //       totalPage.current = null;
+  //       page.current=1
+  //       movie_data();
+  //     }
+  //   } catch (er) { console.log("error", er) }
+  // }
   return (
     <div>
       <div className="nav">
@@ -79,6 +69,7 @@ function Navbar() {
             id="movie_name"
             onInput={(e) => {
               nameRef.current = e.target.value;
+              if (nameRef.current == "") page.current = 1;
               debounce(mymovie, 1000);
             }}
             placeholder="Enter Your movie name"
@@ -107,7 +98,7 @@ function Navbar() {
           {page.current > 1 && (
             <button
               onClick={() => {
-                page.current = (page.current - 1), mymovie();
+                (page.current = page.current - 1), mymovie();
               }}
             >
               Prev
@@ -116,7 +107,7 @@ function Navbar() {
           {totalPage.current > 1 && page.current < totalPage.current && (
             <button
               onClick={() => {
-                page.current = (page.current + 1), mymovie();
+                (page.current = page.current + 1), mymovie();
               }}
             >
               Next

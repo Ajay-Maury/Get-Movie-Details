@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { PageContext } from "../context/PageContext";
 const Body = (props) => {
   const navigate = useNavigate();
   // const {handlePage} = useContext(PageContext)

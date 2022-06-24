@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrendingData } from "../redux/trending/action";
 import Body from "./Body";
+import Filters from "./Filters";
 import Navbar from "./Navbar";
 import Pagination from "./Pagination";
 
@@ -20,6 +21,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />  
+      <Filters/>
       <Body />
       <Pagination/>
     </div>

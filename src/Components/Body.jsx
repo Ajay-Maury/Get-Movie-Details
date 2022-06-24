@@ -45,28 +45,29 @@ const Body = () => {
 
       {movieData.results?.length !== 0 ? (
         <div id="movie">
-         { movieData.results?.map((element, i) => (
-          <div
-            key={i}
-            className="box"
-          >
-            <Link
-              to={`/details/${element.title || element.original_name}`}
-              id="link"
-            >
-              <div className="img_box">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
-                  alt=""
-                />
-              </div>
-              <p>{element.title || element.original_name}</p>
-              <p>
-                {element.release_date &&
-                  `Realese Date: ${element.release_date}`}
-              </p>
-            </Link>
-          </div>
+          {movieData.results?.map((element, i) => (
+            <div key={i} className="box">
+              <Link
+                to={`/details/${
+                  element.title || element.original_name || element.name
+                }`}
+                id="link"
+              >
+                <div className="img_box">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${
+                      element.poster_path || element.profile_path
+                    }`}
+                    alt={element.title || element.original_name || element.name}
+                  />
+                </div>
+                <p>{element.title || element.original_name || element.name}</p>
+                <p>
+                  {element.release_date &&
+                    `Realese Date: ${element.release_date}`}
+                </p>
+              </Link>
+            </div>
           ))}
         </div>
       ) : (

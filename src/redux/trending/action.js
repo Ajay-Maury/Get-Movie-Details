@@ -24,11 +24,12 @@ export const fetchTrendingFailure = (error) => {
   };
 };
 
-export const fetchTrendingData = (type) => (dispatch) => {
-    console.log(1)
+export const fetchTrendingData = (type,category,name,page,day) => (dispatch) => {
+    console.log(category, "category", "type", type, "name", name,day);
     dispatch(fetchTrendingRequest())
     axios(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35`
+      `https://api.themoviedb.org/3/${type}/${category}${day && `/day`}?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}&page=${page}`
+      // `https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35`
     )
       .then((res) => dispatch(fetchTrendingSuscess(res.data)))
       .catch((error) => dispatch(fetchTrendingFailure(error.message)));

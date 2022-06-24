@@ -1,10 +1,12 @@
 import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { searchReducer } from "./search/reducer";
 import { trendingReducer } from "./trending/reducer";
 
 const rootReducer = combineReducers({
-    trendingData : trendingReducer
+    trendingData: trendingReducer,
+    searchData : searchReducer
 })
 const store = legacy_createStore(rootReducer,composeWithDevTools(
     applyMiddleware(thunk)))

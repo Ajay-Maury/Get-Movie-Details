@@ -20,15 +20,20 @@ const Body = (props) => {
             //   navigate(`/details/${element.title}`,{replace:false});
             // }}
           >
-            <Link to={`/details/${element.title}`} id="link">
+            <Link
+              to={`/details/${element.title || element.original_name}`}
+              id="link"
+            >
               <div className="img_box">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
                   alt=""
                 />
               </div>
-              <p>{element.title}</p>
-              <p>{`Realese Date: ${element.release_date}`}</p>
+              <p>{element.title || element.original_name}</p>
+              <p>
+                {element.release_date && `Realese Date: ${element.release_date}`}
+              </p>
             </Link>
           </div>
         ))

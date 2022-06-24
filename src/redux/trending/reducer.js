@@ -9,14 +9,13 @@ const initState = {
 export const trendingReducer = (state = initState, { type, payload }) => {
     switch (type) {
         case FETCH_TRENDING_REQUEST: {
-            return { ...state, loading: true, error: false};
+            return {loading: true, error: false, movieData: {} };
         }
         case FETCH_TRENDING_FAILURE: {
-            return { ...state, loading: false, error: payload};
+            return {loading: false, error: payload, movieData: {} };
         }
         case FETCH_TRENDING_SUSCESS: {
             return {
-              ...state,
               loading: false,
               error: false,
               movieData: payload,

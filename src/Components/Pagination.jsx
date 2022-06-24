@@ -15,23 +15,24 @@ const Pagination = () => {
   return (
     <div>
       <footer className="pageBtn">
-          {page > 1 && (
-            <button
-              onClick={handlePrev}
-            >
-              Prev
-            </button>
-          )}
-          <span>{page} out of {totalPages}</span>
-          {totalPages > 1 && page < totalPages && (
-            <button
-              onClick={handleNext}
-            >
-              Next
-            </button>
-          )}
-        </footer>
-      
+        {page > 1 && <button onClick={handlePrev}>Prev</button>}
+        {totalPages > 0 && (
+          <span
+            style={{
+              textAlign: "center",
+              margin: "1% auto",
+              // fontWeight: "bold",
+              fontSize: "1.3rem",
+            }}
+          >
+            {page} out of {totalPages}
+          </span>
+        )}
+
+        {totalPages > 1 && page < totalPages && (
+          <button onClick={handleNext}>Next</button>
+        )}
+      </footer>
     </div>
   );
 }

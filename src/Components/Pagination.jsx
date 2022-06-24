@@ -1,15 +1,20 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getPage } from '../redux/API-Params/action';
 
 const Pagination = () => {
-    const [page, setPage] = useState(1)
-    
+    const dispatch = useDispatch()
+     const {page, totalPages } = useSelector((state) => state.apiParams);
 
-    async function handleNext(){}
-    async function handlePrev(){}
+  async function handleNext() {
+      dispatch(getPage(page+1));
+    }
+  async function handlePrev() {
+      dispatch(getPage(page-1));
+    }
   return (
     <div>
-      {data && data.length !== 0 && (
-        <footer className="pageBtn">
+      <footer className="pageBtn">
           {page > 1 && (
             <button
               onClick={handlePrev}
@@ -17,7 +22,8 @@ const Pagination = () => {
               Prev
             </button>
           )}
-          {totalPage > 1 && page < totalPage && (
+          <span>{page} out of {totalPages}</span>
+          {totalPages > 1 && page < totalPages && (
             <button
               onClick={handleNext}
             >
@@ -25,7 +31,7 @@ const Pagination = () => {
             </button>
           )}
         </footer>
-      )}
+      
     </div>
   );
 }

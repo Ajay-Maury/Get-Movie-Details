@@ -2,13 +2,13 @@ import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { detailReducer } from "./detail/reducer";
-import { search_PageReducer } from "./search-pagination/reducer";
+import { apiParamsReducer } from "./API-Params/reducer";
 import { trendingReducer } from "./trending/reducer";
 
 const rootReducer = combineReducers({
   trendingData: trendingReducer,
   detail: detailReducer,
-  Name_Page : search_PageReducer,
+  apiParams : apiParamsReducer,
 });
 const store = legacy_createStore(rootReducer,composeWithDevTools(
     applyMiddleware(thunk)))

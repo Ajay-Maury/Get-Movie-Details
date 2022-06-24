@@ -1,10 +1,19 @@
 import { Box } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { getTotalPages } from "../redux/API-Params/action";
 const Body = () => {
   const navigate = useNavigate();
-  const {error,loading,movieData}= useSelector((state) => state.trendingData);
-  console.log("Moviedata", movieData);
+  const dispatch = useDispatch()
+  const { error, loading, movieData } = useSelector((state) => state.trendingData);
+  const pages = movieData.total_pages || 0;
+  console.log("page", pages);
+  useEffect(() => {
+    dispatch(getTotalPages(pages));
+  }, [movieData]);
+  
+  // console.log("Moviedata", movieData);
   console.log("data", movieData.results);
 
   return (

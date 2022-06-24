@@ -24,13 +24,18 @@ export const fetchTrendingFailure = (error) => {
   };
 };
 
-export const fetchTrendingData = (type,category,name,page,day) => (dispatch) => {
-    console.log(category, "category", "type", type, "name", name,day);
-    dispatch(fetchTrendingRequest())
-    axios(
-      `https://api.themoviedb.org/3/${type}/${category}${day && `/day`}?api_key=ab1630eb17982a965c2d03e0c42dce35&query=${name}&page=${page}`
-      // `https://api.themoviedb.org/3/trending/movie/day?api_key=ab1630eb17982a965c2d03e0c42dce35`
-    )
+export const fetchTrendingData =
+  (category, type, time, key, query, page) => (dispatch) => {
+    console.log("category", category, "type", type, "query", query, "time", time, "page", page);
+    console.log("Hello ")
+    const url = `https://api.themoviedb.org/3/${category}/${type}${
+      time && `/${time}`
+    }?api_key=${key}${query && `&query=${query}`}${page && `&page=${page}`}`;
+
+    console.log("url", url);
+
+    dispatch(fetchTrendingRequest());
+    axios(url)
       .then((res) => dispatch(fetchTrendingSuscess(res.data)))
       .catch((error) => dispatch(fetchTrendingFailure(error.message)));
-}
+  };

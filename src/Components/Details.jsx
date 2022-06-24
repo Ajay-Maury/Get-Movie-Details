@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getDetail } from "../redux/detail/action ";
 import "./Details.css";
 const Details = () => {
+  let navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const {loading,error,data} = useSelector(state=>state.detail)
@@ -16,10 +18,12 @@ const Details = () => {
   return (
     <>
       <div id="container">
-        <div id="btn">
-          <Link to="/">
+        <div id="btn" onClick={() => navigate("../", { replace: true })}>
+          <i className="fas fa-window-close"></i>
+
+          {/* <Link to="/">
             <i className="fas fa-window-close"></i>
-          </Link>
+          </Link> */}
         </div>
         <div id="detail">
           <div
@@ -32,7 +36,7 @@ const Details = () => {
           >
             {loading ? "Loading Please Wait " : data.Title}
             {error && `${error}`}
-          </div> 
+          </div>
           {data.Response === "True" ? (
             <div className="box1">
               <div className="poster_box">

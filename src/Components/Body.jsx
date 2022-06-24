@@ -1,24 +1,45 @@
+import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-const Body = (props) => {
+const Body = () => {
   const navigate = useNavigate();
-  // const {handlePage} = useContext(PageContext)
-  // console.log(handlePage);
-  // console.log(props.data)
+  const {error,loading,movieData}= useSelector((state) => state.trendingData);
+  console.log("Moviedata", movieData);
+  console.log("data", movieData.results);
+
   return (
     <>
-      {props.data.length !== 0 ? (
-        props.data.map((element, i) => (
-          // console.log(element
+      {loading && (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "10%",
+            fontWeight: "bold",
+            fontSize: "2.4rem",
+          }}
+        >
+          Loading Please Wait...
+        </div>
+      )}
+      {error && (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "10%",
+            fontWeight: "bold",
+            fontSize: "2.4rem",
+          }}
+        >
+          error
+        </div>
+      )}
+
+      {movieData.results?.length !== 0 ? (
+        <div id="movie">
+         { movieData.results?.map((element, i) => (
           <div
             key={i}
             className="box"
-
-            // onClick={() => {
-            //   let t = element.title;
-            //   console.log(t);
-            //  // localStorage.setItem("Movie-Name", JSON.stringify(t));
-            //   navigate(`/details/${element.title}`,{replace:false});
-            // }}
           >
             <Link
               to={`/details/${element.title || element.original_name}`}
@@ -32,11 +53,13 @@ const Body = (props) => {
               </div>
               <p>{element.title || element.original_name}</p>
               <p>
-                {element.release_date && `Realese Date: ${element.release_date}`}
+                {element.release_date &&
+                  `Realese Date: ${element.release_date}`}
               </p>
             </Link>
           </div>
-        ))
+          ))}
+        </div>
       ) : (
         <p>Movie not found</p>
       )}

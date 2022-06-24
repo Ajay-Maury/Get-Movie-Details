@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { getDetail } from "../redux/detail/action ";
 import "./Details.css";
 const Details = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const { id } = useParams();
-  // let name = JSON.parse(localStoragdata.getItem("Movie-Name"));
-  // consoldata.log(name)
+  const dispatch = useDispatch();
+  const {loading,error,data} = useSelector(state=>state.detail)
 
   useEffect(() => {
-    movieData(id);
+    console.log(id)
+    dispatch(getDetail(id))
   }, []);
 
-  async function movieData(name) {
-    let res = await fetch(`https://www.omdbapi.com/?apikey=5fdad9e6&t=${id}`);
-    res = await res.json();
-    console.log(res);
-    setLoading(false);
-    setData(res);
-  }
-  // const navigate = useN
   return (
     <>
       <div id="container">
@@ -39,6 +31,7 @@ const Details = () => {
             }}
           >
             {loading ? "Loading Please Wait " : data.Title}
+            {error && `${error}`}
           </div> 
           {data.Response === "True" ? (
             <div className="box1">
@@ -89,7 +82,7 @@ const Details = () => {
                 marginBottom: "1%",
               }}
             >
-              {data.Error}{" "}
+              {data.Error}
             </div>
           )}
         </div>

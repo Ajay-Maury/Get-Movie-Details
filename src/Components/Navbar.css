@@ -33,7 +33,7 @@ body{
 }
 #movie
 {
-    padding: 3%;
+    padding: 0.2% 3% 3%;
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 30px;

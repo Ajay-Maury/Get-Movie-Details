@@ -14,11 +14,13 @@ const Filters = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "end",
+        // justifyContent: "end",
+        margin:"0.2% 3%"
       }}
     >
       <select
-        style={{ margin: "1%",padding:"1%" }}
+        style={{ margin: "1%",padding:"0.5%", }}
+        
         name="type"
         id="type"
         onChange={handleSelect}

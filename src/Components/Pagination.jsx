@@ -25,7 +25,7 @@ const Pagination = () => {
               fontSize: "1.3rem",
             }}
           >
-            {page} out of {totalPages}
+           Page {page} out of {totalPages}
           </span>
         )}
 

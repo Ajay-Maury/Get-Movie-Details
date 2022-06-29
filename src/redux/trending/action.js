@@ -25,14 +25,12 @@ export const fetchTrendingFailure = (error) => {
 };
 
 export const fetchTrendingData =
-  (category, type, time, key, query, page) => (dispatch) => {
-    console.log("category", category, "type", type, "query", query, "time", time, "page", page);
-    console.log("Hello ")
-    const url = `https://api.themoviedb.org/3/${category}/${type}${
-      time && `/${time}`
-    }?api_key=${key}${query && `&query=${query}`}${page && `&page=${page}`}`;
+  (params) => (dispatch) => {
+    // console.log("category", category, "type", type, "query", query, "time", time, "page", page);
+    // console.log("Hello ")
+    const url = `https://api.themoviedb.org/3/${params}`;
 
-    console.log("url", url);
+    // console.log("url", url);
 
     dispatch(fetchTrendingRequest());
     axios(url)

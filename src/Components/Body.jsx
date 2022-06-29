@@ -7,13 +7,13 @@ const Body = () => {
   const dispatch = useDispatch()
   const { error, loading, movieData } = useSelector((state) => state.trendingData);
   const pages = movieData.total_pages || 0;
-  console.log("page", pages);
+  // console.log("page", pages);
   useEffect(() => {
     dispatch(getTotalPages(pages));
   }, [movieData]);
   
   // console.log("Moviedata", movieData);
-  console.log("data", movieData.results);
+  // console.log("data", movieData.results);
 
   return (
     <>

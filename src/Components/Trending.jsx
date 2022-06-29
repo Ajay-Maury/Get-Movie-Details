@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Body from './Body';
 
-const Trending = (props) => {
+const Trending = () => {
     const [Moviedata, setData] = useState([]);
     const [loading, setLoading] = useState(false);  
   const [error, setError] = useState(false);  
@@ -32,10 +32,10 @@ const Trending = (props) => {
     //    }
     // }
     
-  useEffect(() => {
-      console.log(props.name)
-        // movie_data()
-    },[])
+  // useEffect(() => {
+  //     console.log(props.name)
+  //       // movie_data()
+  //   },[])
   return (
     <>
           {loading && (

@@ -6,7 +6,7 @@ const Filters = () => {
   const dispatch = useDispatch();
 
   function handleSelect(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     let data = e.target.value;
     dispatch(getType(data));
   }

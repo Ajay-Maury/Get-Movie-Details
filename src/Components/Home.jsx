@@ -9,17 +9,21 @@ import Navbar from "./Navbar";
 import Pagination from "./Pagination";
 
 const Home = () => {
-    let [searchParams, setSearchParams] = useSearchParams()
+  let [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useDispatch();
   const { category, type, time, key, query, page } = useSelector(
-    (state) => state.apiParams
+  (state) => state.apiParams
   );
   // console.log(category, type, time, key, query, page);
-  let x = searchParams.values;
-  console.log("param", x);
-
+  // let x = searchParams.values;
+  // let params = serializeFormQuery(category);
+  // console.log(params)
+  let params = `${category}/${type}${
+    time && `/${time}`
+  }?api_key=${key}${query && `&query=${query}`}${page && `&page=${page}`}`
   useEffect(() => {
-    dispatch(fetchTrendingData(category, type, time, key, query, page));
+    setSearchParams(params)
+    dispatch(fetchTrendingData(params));
   }, [dispatch, category, type, time, key, query, page]);
 
   return (

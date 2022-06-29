@@ -11,7 +11,7 @@ const Details = () => {
   const {loading,error,data} = useSelector(state=>state.detail)
 
   useEffect(() => {
-    console.log(id)
+    // console.log(id)
     dispatch(getDetail(id))
   }, []);
 

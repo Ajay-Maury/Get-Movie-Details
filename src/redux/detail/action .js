@@ -24,9 +24,9 @@ const getDetailFailure = (error) => {
   };
 };
 
-export const getDetail = (name) => (dispatch) => {
+export const getDetail = (name,type) => (dispatch) => {
   dispatch(getDetailRequest());
-  axios(`https://www.omdbapi.com/?apikey=5fdad9e6&t=${name}`)
+  axios(`https://www.omdbapi.com/?apikey=5fdad9e6&t=${name}&type=${type}`)
     .then((res) => dispatch(getDetailSuscess(res.data)))
     .catch((error) => dispatch(getDetailFailure(error.message)));
 };

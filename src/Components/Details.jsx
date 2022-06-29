@@ -6,24 +6,26 @@ import { getDetail } from "../redux/detail/action ";
 import "./Details.css";
 const Details = () => {
   let navigate = useNavigate();
-  const { id } = useParams();
+  const { id,type } = useParams();
   const dispatch = useDispatch();
   const {loading,error,data} = useSelector(state=>state.detail)
-
+console.log(data)
   useEffect(() => {
     // console.log(id)
-    dispatch(getDetail(id))
+    dispatch(getDetail(id,type))
   }, []);
 
   return (
     <>
       <div id="container">
-        <div id="btn" onClick={() => navigate("../", { replace: true })}>
-          <i className="fas fa-window-close"></i>
+        <div id="btn" 
+        // onClick={() => navigate("../", { replace: true })}
+        >
+          {/* <i className="fas fa-window-close"></i> */}
 
-          {/* <Link to="/">
+          <Link to="/">
             <i className="fas fa-window-close"></i>
-          </Link> */}
+          </Link>
         </div>
         <div id="detail">
           <div

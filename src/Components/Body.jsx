@@ -6,11 +6,14 @@ const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { error, loading, movieData } = useSelector((state) => state.trendingData);
-  const pages = movieData.total_pages || 0;
+  const { type } = useSelector((state) => state.apiParams)
+  let typem = type=="tv"?"series":"movie"
+   const pages = movieData.total_pages || 0;
   // console.log("page", pages);
+  
   useEffect(() => {
     dispatch(getTotalPages(pages));
-  }, [movieData]);
+  }, [movieData,type]);
   
   // console.log("Moviedata", movieData);
   // console.log("data", movieData.results);
@@ -49,9 +52,10 @@ const Body = () => {
               <Link
                 to={`/details/${
                   element.title || element.original_name || element.name
-                }`}
+                }/${typem}`}
                 id="link"
               >
+              
                 <div className="img_box">
                   <img
                     src={`https://image.tmdb.org/t/p/w500${

@@ -65,7 +65,7 @@ Large Screen
 ![image](https://user-images.githubusercontent.com/97455068/177002463-d8afe695-1699-47a4-b391-94ffee479c02.png)
 
 Medium Screen 
-![image](https://user-images.githubusercontent.com/97455068/177002519-42828318-69e2-4924-b816-a9f52085e95c.png)
+![image](https://user-images.githubusercontent.com/97455068/177003238-5f570632-9eaf-4306-9d71-cefae5797373.png)
 
 Small Screen 
 ![image](https://user-images.githubusercontent.com/97455068/177002540-743fd85b-485d-4523-9c62-fec1dce7b99d.png)

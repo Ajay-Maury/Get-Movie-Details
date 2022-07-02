@@ -17,7 +17,7 @@ I used Debouncing techinique in search bar to avoid unnecessary Network Request 
 6. HTML
 7. API
 
-# Feaatures :-
+# Features :-
 1. Debouncing
 2. Pagination
 3. Filtering
